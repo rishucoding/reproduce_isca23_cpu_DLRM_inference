@@ -11,7 +11,7 @@ PyGetHT='import sys; c=int(sys.argv[1]); print(",".join(str(2*i + off) for off i
 NUM_BATCH=120
 BS=64
 LOG=print_out.log
-INSTANCES=1
+INSTANCES=24
 EXTRA_FLAGS=
 GDB='gdb --args'
 DLRM_SYSTEMS=$DLRM_SYSTEM
