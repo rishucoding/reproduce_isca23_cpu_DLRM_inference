@@ -1,0 +1,78 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1b4f3a26..c5a21a46 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -45,4 +45,7 @@ set(DPCPP_THIRD_PARTY_ROOT "${PROJECT_SOURCE_DIR}/third_party")
+ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/Modules)
+ 
+ # Common dependencies
+-include(cmake/CpuDynDisp.cmake)
+\ No newline at end of file
++include(cmake/CpuDynDisp.cmake)
++set(VTUNE_INSTALL_DIR "/opt/intel/oneapi/vtune/latest")
++include_directories(${VTUNE_INSTALL_DIR}/include)
++target_link_libraries(${PLUGIN_NAME} PUBLIC ${VTUNE_INSTALL_DIR}/lib64/libittnotify.a)
+diff --git a/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.cpp b/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.cpp
+index 49e3edc0..006eed74 100644
+--- a/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.cpp
++++ b/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.cpp
+@@ -14,6 +14,7 @@
+ #include <torch/script.h>
+ #include <algorithm>
+ #include "csrc/utils/ipex_op_profile.h"
++#include <ittnotify.h>
+ 
+ namespace torch_ipex {
+ namespace cpu {
+@@ -186,14 +187,25 @@ bool embedding_bag_fast_path_sum(
+   return true;
+ }
+ 
++static bool _start_prof = false;
++void start_embed_prof() { _start_prof = true; }
++
++__itt_event embed_event = __itt_event_create("Embed", 5);
++
+ at::Tensor embedding_bag(
+     const at::Tensor& weight,
+     const at::Tensor& indices,
+     const at::Tensor& offsets,
+     bool sparse,
+     bool include_last_offset) {
+-  return cpu::_embedding_bag(
++  if (_start_prof) {
++    __itt_resume();
++  }
++  __itt_event_start(embed_event);
++  auto&& ret = cpu::_embedding_bag(
+       weight, indices, offsets, sparse, include_last_offset);
++  __itt_event_end(embed_event);
++  return ret;
+ }
+ 
+ } // namespace torch_ipex
+diff --git a/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.h b/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.h
+index 7da1d64c..6247c878 100644
+--- a/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.h
++++ b/intel_extension_for_pytorch/csrc/aten/cpu/EmbeddingBag.h
+@@ -8,6 +8,8 @@ const int MODE_MAX = 2;
+ 
+ namespace torch_ipex {
+ 
++void start_embed_prof();
++
+ bool embedding_bag_fast_path_sum(
+     const at::Tensor weight,
+     const c10::optional<at::Tensor> per_sample_weights,
+diff --git a/intel_extension_for_pytorch/csrc/python/init_python_bindings.cpp b/intel_extension_for_pytorch/csrc/python/init_python_bindings.cpp
+index 1ecec208..223bd4ba 100644
+--- a/intel_extension_for_pytorch/csrc/python/init_python_bindings.cpp
++++ b/intel_extension_for_pytorch/csrc/python/init_python_bindings.cpp
+@@ -125,6 +125,7 @@ void InitIpexModuleBindings(py::module m) {
+   // extend OPs
+   m.def(
+       "embedding_bag_fast_path_sum", &torch_ipex::embedding_bag_fast_path_sum);
++  m.def("start_embed_prof", &torch_ipex::start_embed_prof);
+ 
+   // runtime
+   py::class_<torch_ipex::runtime::FutureTensor>(m, "FutureTensor")
