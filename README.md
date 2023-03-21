@@ -10,6 +10,8 @@ Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
 * sudo apt update
 * sudo apt install intel-oneapi-vtune
 * source /opt/intel/oneapi/vtune/latest/env/vars.sh
+* vtune-self-checker.sh
+Note: Ensure that the vtune-self-checker.sh script passes the Memory, Architecture, and Hardware Event Analysis (suggestion: ensure to install sampling drivers and appropriately set the kernel runtime parameters.)
 
 ## Install conda and setup env
 * conda create --name dlrm_cpu python=3.9 ipython
