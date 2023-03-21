@@ -23,3 +23,10 @@ Note: carefully grep the latency values obtained in the print_out.log file. Ensu
 2. To collect baseline latency values: run scripts/fig13/core/normal_run_1c.sh and scripts/fig13/24core/normal_run_24.sh
 3. To collect latency values with hardware prefetcher disabled: first disable the hardware prefetcher using steps shown in README.md, and then use (2). 
 4. To collect latency values with software prefetcher enabled: ensure hardware prefetcher is enabled, then enable software prefetch using the steps shown in README.md, and then use (2)
+
+
+## Steps to replicate Figure 15
+1. Use Intel VTune profiler to collect the cache hit rate, and average load latency. 
+2. Observe these performance counters in hardware event analysis: {MEM_LOAD_RETIRED.L1_HIT, MEM_LOAD_RETIRED.L1_MISS, 
+    MEM_LOAD_RETIRED.L2_HIT, MEM_LOAD_RETIRED.L3_HIT, MEM_LOAD_RETIRED.L3_MISS}. 
+3. To obtain the average load latency, first obtain the L1D$hit rate, and obtain the average latency value from VTune. Use the formula: L1D$_hit% * 5 + (100%-L1D$_hit%) * (average_latency)
