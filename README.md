@@ -51,8 +51,8 @@ Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
 * git clone -b pytorch-r1.12-models https://github.com/IntelAI/models.git
 * cd models
 * export MODELS_PATH=$(pwd)
-* cp $DLRM_SYSTEMS/dlrm_patches/dlrm_data_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_data_pytorch.py
-* cp $DLRM_SYSTEMS/dlrm_patches/dlrm_s_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
+* cp $DLRM_SYSTEM/dlrm_patches/dlrm_data_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_data_pytorch.py
+* cp $DLRM_SYSTEM/dlrm_patches/dlrm_s_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
 * cd $IPEX_PATH
 * git apply $DLRM_SYSTEM/dlrm_patches/ipex.patch
 * REL_WITH_DEB_INFO=1 USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" python setup.py install
