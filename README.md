@@ -76,6 +76,11 @@ NOTE: You can set the number of CPU cores to use, model configurations, and data
 * cd $IPEX_PATH
 * REL_WITH_DEB_INFO=1 USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" python setup.py install
 
+## Disable software prefetch
+* cd $IPEX_PATH
+* git restore intel_extension_for_pytorch/csrc/aten/cpu/kernels/EmbeddingBagKrnl.cpp
+* REL_WITH_DEB_INFO=1 USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" python setup.py install
+
 ## Disable hardware prefetching
 * git clone https://github.com/intel/msr-tools
 * cd msr-tools
