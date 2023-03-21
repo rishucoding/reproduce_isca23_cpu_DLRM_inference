@@ -64,7 +64,7 @@ Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
 * bash collect_1s.sh
 NOTE: You can set the number of CPU cores to use, model configurations, and dataset paths in the collect_1s.sh script. 
 
-## Enable HyperThreading
+## Enable MP-HT HyperThreading
 * cd $TORCH_PATH 
 * cp  $DLRM_SYSTEM/opt_designs/ht/torch_files/thread_pool.{cpp,h} $TORCH_PATH/c10/core/
 * cp  $DLRM_SYSTEM/opt_designs/ht/torch_files/throughput_benchmark.{cpp,h} $TORCH_PATH/torch/csrc/utils/
