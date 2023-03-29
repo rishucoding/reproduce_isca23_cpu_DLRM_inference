@@ -102,6 +102,9 @@ NOTE: You can set the number of CPU cores to use, model configurations, and data
 * bash $DLRM_SYSTEM/scripts/set_freq.sh
 
 
+## To replicate Figures: 
+Please refer to the file replicate_figures.md for the detailed steps on how to conduct the experiments associated with each Figure.
+
 
 
 
