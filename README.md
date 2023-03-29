@@ -95,8 +95,15 @@ NOTE: You can set the number of CPU cores to use, model configurations, and data
 * cd msr-tools
 * sudo bash autogen.sh
 * sudo ./wrmsr -a 0x1a4 15 #disables on all cores
-* sudo ./wrmsr -a 0x1a4 0 #enables on all cores
 * sudo ./wrmsr -p 0 0x1a4 15 #disables on core 0
+
+## Enable hardware prefetching
+Note: by default it is enabled in the CPU. However, to ensure, you can check the value of register 0x1a4
+* sudo ./rdmsr -a 0x1a4 #return value 0 means prefetching is enabled, return value 15 means prefetching is disabled.
+
+To enable prefetching: 
+* sudo ./wrmsr -a 0x1a4 0 #enables on all cores
+* sudo ./wrmsr -p 0 0x1a4 0 #enables on core 0
 
 ## Disable turbo boost and set frequency
 * bash $DLRM_SYSTEM/scripts/set_freq.sh
