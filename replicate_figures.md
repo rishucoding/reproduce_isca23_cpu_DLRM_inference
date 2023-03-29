@@ -1,5 +1,7 @@
 Note: the scripts for obtaining the latency numbers are present in scripts directory. Also, the 1core and 24core scripts are separated.
+
 Note: carefully grep the latency values obtained in the print_out.log file. Ensure to remove the .log files after every run. 
+
 Note: the latency value to grep should be part of line: "Average latency per example: 66.007ms". So, 66.007 is going to be noted and used for speedup calculations.
 
 ## Steps to replicate Figure 13
