@@ -94,6 +94,7 @@ NOTE: You can set the number of CPU cores to use, model configurations, and data
 * git clone https://github.com/intel/msr-tools
 * cd msr-tools
 * sudo bash autogen.sh
+* sudo make
 * sudo ./wrmsr -a 0x1a4 15 #disables on all cores
 * sudo ./wrmsr -p 0 0x1a4 15 #disables on core 0
 
