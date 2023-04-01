@@ -7,6 +7,8 @@ Note: carefully grep the latency values obtained in the print_out.log file. Ensu
 
 Note: the latency value to grep should be part of line: "Average latency per example: 66.007ms". So, 66.007 is going to be noted and used for speedup calculations.
 
+Note: Directory scripts contain the bash scripts to obtain the latency numbers needed for various figures. To run any script, you must first copy the script to the MODELS_PATH. 
+
 ## Steps to replicate Figure 13
 1. To collect baseline latency values: run scripts/fig13/1core/normal_run_1c.sh and scripts/fig13/24core/normal_run_24c.sh
 2. To collect latency values with hardware prefetcher disabled: first disable the hardware prefetcher using steps shown in README.md, and then use (1)
