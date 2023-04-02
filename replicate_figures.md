@@ -27,7 +27,7 @@ Note: Directory scripts contain the bash scripts to obtain the latency numbers n
 6. To collect latency values for integrated scheme: ensure hardware prefetcher is enabled, enable software prefetcher, and MP-HT scheme, and run scripts/fig14/1core/mp_ht_1c.sh and scripts/fig14/24core/mp_ht_24c.sh.
 
 ## Steps to replicate Figure 12
-1. cp $DLRM_SYSTEM/dlrm_patches/dlrm_s_pytorch_emb_only.py models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
+1. cp $DLRM_SYSTEM/dlrm_patches/dlrm_s_pytorch_emb_only.py $MODELS_PATH/models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
 2. To collect baseline latency values: run scripts/fig13/1core/normal_run_1c.sh and scripts/fig13/24core/normal_run_24c.sh
 3. To collect latency values with hardware prefetcher disabled: first disable the hardware prefetcher using steps shown in README.md, and then use (2). 
 4. To collect latency values with software prefetcher enabled: ensure hardware prefetcher is enabled, then enable software prefetch using the steps shown in README.md, and then use (2)
