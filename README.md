@@ -1,6 +1,11 @@
 # reproduce_isca23_cpu_DLRM_inference
 Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
 
+## Base directory
+* mkdir isca23_dlrm
+* cd isca23_dlrm
+* export BASE_PATH=$(pwd)
+* echo BASE_PATH=$BASE_PATH >> paths.export
 
 ## Install Intel Vtune
 
@@ -24,9 +29,11 @@ Note: Ensure that the vtune-self-checker.sh script passes the Memory, Architectu
 
 ## Build PyTorch from source
 * export CMAKE_PREFIX_PATH=${CONDA_PREFIX:-"$(dirname $(which conda))/../"}
+* echo CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH >> paths.export
 * git clone --recursive -b v1.12.1 https://github.com/pytorch/pytorch
 * cd pytorch
 * export TORCH_PATH=$(pwd)
+* echo TORCH_PATH=$TORCH_PATH >> paths.export
 * REL_WITH_DEB_INFO=1 USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" USE_CUDA=0 python setup.py install
 
 
@@ -35,6 +42,7 @@ Note: Ensure that the vtune-self-checker.sh script passes the Memory, Architectu
 * git clone --recursive -b v1.12.300 https://github.com/intel/intel-extension-for-pytorch
 * cd intel-extension-for-pytorch
 * export IPEX_PATH=$(pwd)
+* echo IPEX_PATH=$IPEX_PATH >> paths.export
 * REL_WITH_DEB_INFO=1 USE_NATIVE_ARCH=1 CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0" python setup.py install
   
 ## Build itt-python
@@ -42,6 +50,7 @@ Note: Ensure that the vtune-self-checker.sh script passes the Memory, Architectu
 * git clone https://github.com/NERSC/itt-python
 * cd itt-python
 * export VTUNE_PROFILER_DIR=/opt/intel/oneapi/vtune/latest
+* echo VTUNE_PROFILER_DIR=$VTUNE_PROFILER_DIR >> paths.export
 * python setup.py install --vtune=$VTUNE_PROFILER_DIR
 
 
@@ -50,9 +59,11 @@ Note: Ensure that the vtune-self-checker.sh script passes the Memory, Architectu
 * git clone https://github.com/rishucoding/reproduce_isca23_cpu_DLRM_inference
 * cd reproduce_isca23_cpu_DLRM_inference
 * export DLRM_SYSTEM=$(pwd)
+* echo DLRM_SYSTEM=$DLRM_SYSTEM >> paths.export
 * git clone -b pytorch-r1.12-models https://github.com/IntelAI/models.git
 * cd models
 * export MODELS_PATH=$(pwd)
+* echo MODELS_PATH=$MODELS_PATH >> paths.export
 * cp $DLRM_SYSTEM/dlrm_patches/dlrm_data_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_data_pytorch.py
 * cp $DLRM_SYSTEM/dlrm_patches/dlrm_s_pytorch.py models/recommendation/pytorch/dlrm/product/dlrm_s_pytorch.py
 * cd $IPEX_PATH
@@ -115,7 +126,9 @@ To enable prefetching:
 ## To replicate Figures: 
 Please refer to the file replicate_figures.md for the detailed steps on how to conduct the experiments associated with each Figure.
 
-
+## Source path in shell: 
+Note: Since you may loose connection to shell or you may start with a fresh terminal, it is important to have the environment variables in the shell. To do this: 
+* source paths.export
 
 
 
