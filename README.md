@@ -106,6 +106,8 @@ NOTE: You can set the number of CPU cores to use, model configurations, and data
 ## Disable hardware prefetching
 * git clone https://github.com/intel/msr-tools
 * cd msr-tools
+* export HW_PF=$(pwd)
+* echo HW_PF=$HW_PF >> paths.export
 * sudo bash autogen.sh
 * sudo make
 * sudo ./wrmsr -a 0x1a4 15 #disables on all cores
