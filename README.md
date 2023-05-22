@@ -1,6 +1,8 @@
 # reproduce_isca23_cpu_DLRM_inference
 Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
 
+## Paper: Optimizing CPU Performance for Recommendation Systems At-Scale
+
 ## Base directory
 * mkdir isca23_dlrm
 * cd isca23_dlrm
