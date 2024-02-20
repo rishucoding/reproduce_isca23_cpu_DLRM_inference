@@ -134,8 +134,17 @@ Please refer to the file replicate_figures.md for the detailed steps on how to c
 Note: Since you may loose connection to shell or you may start with a fresh terminal, it is important to have the environment variables in the shell. To do this: 
 * source paths.export
 
-
-
+## Notes
+please consider to cite our paper if you use the code or data in your research project.
+```
+@inproceedings{jain2023optimizing,
+  title={Optimizing CPU Performance for Recommendation Systems At-Scale},
+  author={Jain, Rishabh and Cheng, Scott and Kalagi, Vishwas and Sanghavi, Vrushabh and Kaul, Samvit and Arunachalam, Meena and Maeng, Kiwan and Jog, Adwait and Sivasubramaniam, Anand and Kandemir, Mahmut Taylan and others},
+  booktitle={Proceedings of the 50th Annual International Symposium on Computer Architecture},
+  pages={1--15},
+  year={2023}
+}
+```
 
 
 
