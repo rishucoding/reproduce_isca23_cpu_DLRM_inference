@@ -1,5 +1,5 @@
 # reproduce_isca23_cpu_DLRM_inference
-Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper
+Sharing the codebase and steps for artifact evaluation for ISCA 2023 paper (https://dl.acm.org/doi/abs/10.1145/3579371.3589112)
 
 ## Paper: Optimizing CPU Performance for Recommendation Systems At-Scale
 
